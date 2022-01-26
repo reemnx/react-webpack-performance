@@ -24,6 +24,9 @@ module.exports = {
   optimization: {
     minimize: true,
     minimizer: [new TerserPlugin()],
+    splitChunks: {
+      chunks: "all",
+    },
   },
   module: {
     rules: [
@@ -34,7 +37,6 @@ module.exports = {
           loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env", "@babel/preset-react"],
-            plugins: ["@babel/plugin-syntax-dynamic-import"],
           },
         },
       },

@@ -1,5 +1,5 @@
 import React from "react"
 
-export const Test = () => {
+export default Test = () => {
   return <h3>Im a test</h3>
 }
