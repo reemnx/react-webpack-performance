@@ -10,10 +10,13 @@ const CompressionPlugin = require("compression-webpack-plugin")
 
 module.exports = {
   // Entry point where webpack start to chaning the imports and generate static JS file that ready to get attached
-  entry: "/src/index.js",
+  entry: {
+    index: "/src/index.js",
+  },
   // Output folder which the build package will be exported
   output: {
     filename: "[name].bundle.js",
+    chunkFilename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
     asyncChunks: true,
     clean: true,
@@ -31,6 +34,7 @@ module.exports = {
           loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env", "@babel/preset-react"],
+            plugins: ["@babel/plugin-syntax-dynamic-import"],
           },
         },
       },
@@ -47,9 +51,7 @@ module.exports = {
       template: "./src/index.html",
     }),
 
-    new CompressionPlugin({
-      algorithm: "gzip",
-    }),
+    new CompressionPlugin(),
 
     new webpack.ProvidePlugin({
       process: "process/browser",
